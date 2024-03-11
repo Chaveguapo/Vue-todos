@@ -1,12 +1,21 @@
 <script setup>
+import { ref, defineEmits } from "vue"
 
+
+
+const emit = defineEmits("create-todo")
+const todo = ref("");
+
+const createTodo = () => {
+    emit("create-todo", todo.value);
+}
 </script>
 
 
 <template>
     <div class="input-wrap">
-        <input type="text">
-        <button>Create</button>
+        <input type="text" v-model="todo">
+        <button @click="createTodo()">Create</button>
     </div>
 </template>
 
