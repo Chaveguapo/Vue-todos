@@ -1,5 +1,8 @@
 <script setup>
-import TodoCreator from './components/TodoCreator.vue';
+import TodoCreator from '../components/TodoCreator.vue';
+import { ref } from 'vue';
+
+const todoList = ref([]);
 
 
 
@@ -8,7 +11,7 @@ import TodoCreator from './components/TodoCreator.vue';
 <template>
   <main>
     <h1>Create Todo</h1>
-    <TodoCreator />
+    <TodoCreator @create-todo="createTodo" />
 
   </main>
 </template>
