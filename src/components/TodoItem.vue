@@ -1,12 +1,15 @@
 <script setup>
-import { Icon } from '@iconify/vue';
 const props = defineProps({
     todo: {
         type: Object,
         required: true,
     },
+    index: {
+        type: Number,
+        required: true
+    }
 });
-
+defineEmits(['toggle-complete']);
 </script>
 
 
@@ -14,16 +17,19 @@ const props = defineProps({
 <template>
 
     <li>
-        <input type="checkbox" :checked="todo.isCompleted">
+        <input type="checkbox" :checked="todo.isCompleted" @input="$emit('toggle-complete', index)">
         <div class="todo">
-            <input type=" text" :value="todo.todo">
-            <span>{{ todo.todo }}</span>
+            <input v-if="todo.isEditing" type=" text" :value="todo.todo">
+            <span v-else>{{ todo.todo }}</span>
 
         </div>
 
         <div class="todo-actions">
-            <Icon icon="ph:check-circle-light" class="icon" width="22" height="22" style="color: #41b080" />
-            <Icon icon="ph:pencil-fill" class="icon" width="22" height="22" style="color: #41b080" />
+            <Icon v-if="todo.isEditing" icon="ph:check-circle-light" class="icon" width="22" height="22"
+                style="color: #41b080" />
+
+            <Icon v-else icon="ph:pencil-fill" class="icon" width="22" height="22" style="color: #41b080" />
+
             <Icon icon="ph:trash" class="icon" width="22" height="22" style="color: #f95e5e" />
 
         </div>

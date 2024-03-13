@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { uid } from 'uid';
 import TodoCreator from '../components/TodoCreator.vue';
 import TodoItem from "../components/TodoItem.vue"
+import { Icon } from '@iconify/vue';
+
 
 const todoList = ref([]);
 
@@ -22,9 +24,13 @@ const createTodo = (todo) => {
   <main>
     <h1>Create Todo</h1>
     <TodoCreator @create-todo="createTodo" />
-    <ul class="todo-list">
-      <TodoItem v-for="todo in todoList" :todo="todo" />
+    <ul class="todo-list" v-if="todoList.length > 0">
+      <TodoItem v-for="(todo, index) in todoList" :todo="todo" :index="index" @toggle-complete="toggleTodoComplete" />
     </ul>
+    <p class="todos-msg" v-else>
+      <Icon icon="noto-v1:sad-but-relieved-face" width="32" height="32" />
+      <span>You have no todo's to complete! Add one!</span>
+    </p>
 
   </main>
 </template>
