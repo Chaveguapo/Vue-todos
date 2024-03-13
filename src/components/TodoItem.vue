@@ -1,4 +1,5 @@
 <script setup>
+import { Icon } from "@iconify/vue"
 const props = defineProps({
     todo: {
         type: Object,
@@ -6,10 +7,10 @@ const props = defineProps({
     },
     index: {
         type: Number,
-        required: true
+        required: true,
     }
 });
-defineEmits(['toggle-complete']);
+defineEmits(['toggle-complete', 'edit-todo', 'update-todo', "delete-todo"]);
 </script>
 
 
@@ -19,24 +20,26 @@ defineEmits(['toggle-complete']);
     <li>
         <input type="checkbox" :checked="todo.isCompleted" @input="$emit('toggle-complete', index)">
         <div class="todo">
-            <input v-if="todo.isEditing" type=" text" :value="todo.todo">
-            <span v-else :class="{ 'completed-todo': todo.iscompleted }">{{ todo.todo }}</span>
+            <input v-if="todo.isEditing" type=" text" :value="todo.todo"
+                @input="$emit('update-todo', $event.target.value, index)">
+            <span v-else :class="{ 'completed-todo': todo.isCompleted }">{{ todo.todo }}</span>
 
         </div>
 
         <div class="todo-actions">
             <Icon v-if="todo.isEditing" icon="ph:check-circle-light" class="icon" width="22" height="22"
-                style="color: #41b080" />
+                style="color: #41b080" @click="$emit('edit-todo', index)" />
 
-            <Icon v-else icon="ph:pencil-fill" class="icon" width="22" height="22" style="color: #41b080" />
+            <Icon v-else icon="ph:pencil-fill" class="icon" width="22" height="22" style="color: #41b080"
+                @click="$emit('edit-todo', index)" />
 
-            <Icon icon="ph:trash" class="icon" width="22" height="22" style="color: #f95e5e" />
+            <Icon icon="ph:trash" class="icon" width="22" height="22" style="color: #f95e5e"
+                @click="$emit('delete-todo', todo.id)" />
 
         </div>
     </li>
 
 </template>
-
 
 <style lang="scss" scoped>
 li {
@@ -73,8 +76,6 @@ li {
         .completed-todo {
             text-decoration: line-through;
         }
-
-
 
         input[type="text"] {
             width: 100%;
