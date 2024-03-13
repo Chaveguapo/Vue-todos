@@ -22,8 +22,8 @@ const props = defineProps({
         </div>
 
         <div class="todo-actions">
-            <Icon icon="ph:check-circle-light" class="icon" width="32" height="32" style="color: #2fb92d" />
-            <Icon icon="ph:pencil-fill" class="icon" width="32" height="32" style="color: #2fb92d" />
+            <Icon icon="ph:check-circle-light" class="icon" width="32" height="32" style="color: #41b080" />
+            <Icon icon="ph:pencil-fill" class="icon" width="32" height="32" style="color: #41b080" />
             <Icon icon="ph:trash" class="icon" width="32" height="32" style="color: #f95e5e" />
 
         </div>

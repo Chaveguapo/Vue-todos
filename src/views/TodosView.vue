@@ -23,7 +23,7 @@ const createTodo = (todo) => {
     <h1>Create Todo</h1>
     <TodoCreator @create-todo="createTodo" />
     <ul>
-      <TodoItem v-for="item in todoList" :todo="item" />
+      <TodoItem v-for="todo in todoList" :todo="todo" />
     </ul>
 
   </main>
